@@ -37,6 +37,11 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $fotoPath = null;
+        if ($request->hasFile('foto_perfil')) {
+            $fotoPath = $request->file('foto_perfil')->store('fotos_perfil', 'public');
+        }
+
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
