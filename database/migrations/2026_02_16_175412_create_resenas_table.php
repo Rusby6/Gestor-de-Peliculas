@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('resenas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('pelicula_id')->constrained()->onDelete('cascade');
+            $table->integer('puntuacion'); 
+            $table->text('reseña')->nullable(); 
+            $table->boolean('visible')->default(true); // para moderación (admin puede ocultar)
             $table->timestamps();
+            
+            // Una valoración por usuario y película
+            $table->unique(['user_id', 'pelicula_id']);
+            
         });
     }
 

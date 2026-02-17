@@ -48,4 +48,39 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Un usuario tiene muchas listas personales
+    public function listasPersonales()
+    {
+        return $this->hasMany(ListaPersonal::class);
+    }
+
+    // Un usuario tiene muchas reseñas
+    public function resenas()
+    {
+        return $this->hasMany(Resena::class);
+    }
+
+    // Un usuario tiene muchas colecciones
+    public function colecciones()
+    {
+        return $this->hasMany(Coleccion::class);
+    }
+
+    // Películas que el usuario tiene en sus listas
+    public function peliculasEnListas()
+    {
+        return $this->belongsToMany(Pelicula::class, 'listas_personales')->withPivot('tipo')->withTimestamps();
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === 'user';
+    }
+
 }

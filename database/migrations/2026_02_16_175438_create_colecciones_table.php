@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('colecciones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('nombre');
+            $table->text('descripcion')->nullable(); 
+            $table->boolean('visibilidad')->default(false); // false=privada, true=pública
             $table->timestamps();
         });
     }

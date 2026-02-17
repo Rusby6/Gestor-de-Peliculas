@@ -12,6 +12,23 @@ class Coleccion extends Model
         'user_id',
         'nombre',
         'descripcion',
-        'publica'
+        'visibillidad'
     ];
+
+    protected $casts = [
+        'visibilidad' => 'boolean',
+    ];
+
+    // Una colección pertenece a un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Una colección tiene muchas películas (relación N-N)
+    public function peliculas()
+    {
+        return $this->belongsToMany(Pelicula::class, 'coleccion_peliculas')->withTimestamps();
+    }
+
 }

@@ -11,6 +11,19 @@ class ListaPersonal extends Model
     protected $fillable = [
         'user_id',
         'pelicula_id',
-        'tipo'
+        'estado',
     ];
+
+    // Una lista pertenece a un usuario
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // Una lista pertenece a una película
+    public function pelicula()
+    {
+        return $this->belongsTo(Pelicula::class);
+    }
+
 }

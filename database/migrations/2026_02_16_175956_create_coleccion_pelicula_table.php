@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('coleccion_pelicula', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId('coleccion_id')->constrained('colecciones')->onDelete('cascade');
+                  
+            $table->foreignId('pelicula_id')->constrained('peliculas')->onDelete('cascade');
+                  
             $table->timestamps();
+            
+            // Evitar duplicados en la misma colección
+            $table->unique(['coleccion_id', 'pelicula_id']);
         });
     }
 
