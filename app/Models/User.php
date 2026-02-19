@@ -83,4 +83,9 @@ class User extends Authenticatable
         return $this->role === 'user';
     }
 
+    public function miLista()
+    {
+        return $this->hasMany(MiLista::class);
+    }
+
 }
