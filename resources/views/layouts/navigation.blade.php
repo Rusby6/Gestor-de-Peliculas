@@ -10,14 +10,24 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+               <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
 
+                    <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('peliculas.index')">
+                        {{ __('Catálogo') }}
+                    </x-nav-link>
+                    
                     <x-nav-link :href="route('peliculas.buscar')" :active="request()->routeIs('peliculas.buscar')">
                         {{ __('Buscar Películas') }}
+                    </x-nav-link>
+                    
+                    <!-- 🔴 NUEVO: Mis Listas (antes era mi-lista.index) -->
+                    <x-nav-link :href="route('listas.index')" :active="request()->routeIs('listas.index')">
+                        {{ __('Mis Listas') }}
+                    </x-nav-link>
+
+                   <x-nav-link :href="route('colecciones.index')" :active="request()->routeIs('colecciones.*')">
+                        {{ __('Colecciones') }}
                     </x-nav-link>
                 </div>
             </div>

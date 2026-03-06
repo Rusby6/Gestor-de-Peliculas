@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('pelicula_id')->constrained()->onDelete('cascade');
-            $table->integer('puntuacion'); 
-            $table->text('reseña')->nullable(); 
+            $table->integer('puntuacion');
+            $table->text('texto')->nullable(); 
             $table->boolean('visible')->default(true); // para moderación (admin puede ocultar)
             $table->timestamps();
             

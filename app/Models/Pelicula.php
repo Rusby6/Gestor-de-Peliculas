@@ -12,35 +12,70 @@ class Pelicula extends Model
         'anio',
         'sinopsis',
         'duracion',
-        'generos',
         'poster_path',
     ];
 
+    /**
+     * Una película tiene muchas reseñas
+     */
     public function resenas()
     {
         return $this->hasMany(Resena::class);
     }
 
-    // Una película está en muchas listas personales
+    /**
+     * Una película está en muchas listas personales
+     */
     public function listasPersonales()
     {
         return $this->hasMany(ListaPersonal::class);
     }
 
-    // Una película pertenece a muchas colecciones
+    /**
+     * Una película pertenece a muchas colecciones
+     */
     public function colecciones()
     {
-        return $this->belongsToMany(Coleccion::class, 'coleccion_peliculas')->withTimestamps();
+        return $this->belongsToMany(Coleccion::class, 'coleccion_pelicula')->withTimestamps();
     }
 
-    // Calcular la media de valoraciones de la película
+    /**
+     * Una película pertenece a muchos géneros
+     */
+        public function generos()
+    {
+        return $this->belongsToMany(Genero::class, 'genero_pelicula')->withTimestamps();
+    }
+
+    /**
+     * Calcular la media de valoraciones de la película
+     */
     public function mediaValoraciones()
     {
-        return $this->resenas()->avg('puntuacion');
+        return $this->resenas()->avg('puntuacion') ?? 0;
     }
 
-    public function generos()
+    /**
+     * Obtener el número total de valoraciones
+     */
+    public function totalValoraciones()
     {
-        return $this->belongsToMany(Genero::class, 'genero_pelicula');
+        return $this->resenas()->count();
+    }
+
+    /**
+     * Verificar si un usuario ya valoró esta película
+     */
+    public function valoradaPorUsuario($userId)
+    {
+        return $this->resenas()->where('user_id', $userId)->exists();
+    }
+
+    /**
+     * Obtener la valoración de un usuario específico
+     */
+    public function valoracionDeUsuario($userId)
+    {
+        return $this->resenas()->where('user_id', $userId)->first();
     }
 }

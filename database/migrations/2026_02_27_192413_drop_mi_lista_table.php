@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
+        Schema::dropIfExists('mi_lista'); // Elimina la tabla si existe
+    }
+
+    public function down(): void
+    {
+        // Si quieres poder revertir, recrea la tabla
         Schema::create('mi_lista', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
@@ -19,17 +22,7 @@ return new class extends Migration
             $table->string('poster_path')->nullable();
             $table->integer('anio')->nullable();
             $table->timestamps();
-            
-            // Un usuario no puede guardar la misma película dos veces
             $table->unique(['user_id', 'tmdb_id']);
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('mi_lista');
     }
 };

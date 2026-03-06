@@ -12,7 +12,7 @@ class Resena extends Model
         'user_id',
         'pelicula_id',
         'puntuacion',
-        'texto',
+        'texto',    
         'visible',
     ];
 
@@ -20,13 +20,11 @@ class Resena extends Model
         'visible' => 'boolean',
     ];
 
-    // Una reseña pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Una reseña pertenece a una película
     public function pelicula()
     {
         return $this->belongsTo(Pelicula::class);

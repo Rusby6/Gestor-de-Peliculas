@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coleccion extends Model
 {
-    protected $table = 'colecciones'; 
+    protected $table = 'colecciones';
 
     protected $fillable = [
         'user_id',
         'nombre',
         'descripcion',
-        'visibillidad'
+        'publica',
     ];
 
     protected $casts = [
-        'visibilidad' => 'boolean',
+        'publica' => 'boolean',
     ];
 
     // Una colección pertenece a un usuario
@@ -28,7 +28,6 @@ class Coleccion extends Model
     // Una colección tiene muchas películas (relación N-N)
     public function peliculas()
     {
-        return $this->belongsToMany(Pelicula::class, 'coleccion_peliculas')->withTimestamps();
+        return $this->belongsToMany(Pelicula::class, 'coleccion_pelicula')->withTimestamps();
     }
-
 }

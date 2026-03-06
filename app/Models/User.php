@@ -67,12 +67,6 @@ class User extends Authenticatable
         return $this->hasMany(Coleccion::class);
     }
 
-    // Películas que el usuario tiene en sus listas
-    public function peliculasEnListas()
-    {
-        return $this->belongsToMany(Pelicula::class, 'listas_personales')->withPivot('tipo')->withTimestamps();
-    }
-
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
@@ -82,10 +76,4 @@ class User extends Authenticatable
     {
         return $this->role === 'user';
     }
-
-    public function miLista()
-    {
-        return $this->hasMany(MiLista::class);
-    }
-
 }
