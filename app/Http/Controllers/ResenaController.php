@@ -41,23 +41,6 @@ class ResenaController extends Controller
         return back()->with('success', 'Valoración guardada correctamente');
     }
 
-    public function update(Request $request, Resena $resena)
-    {
-        Gate::authorize('update', $resena);
-        
-        $request->validate([
-            'puntuacion' => 'required|integer|min:1|max:10',
-            'texto' => 'nullable|string|max:1000',
-        ]);
-
-        $resena->update([
-            'puntuacion' => $request->puntuacion,
-            'texto' => $request->texto,
-        ]);
-
-        return back()->with('success', 'Reseña actualizada');
-    }
-
     public function destroy(Resena $resena)
     {
         Gate::authorize('delete', $resena);
