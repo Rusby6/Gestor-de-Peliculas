@@ -50,32 +50,6 @@
                             @endif
                         </div>
 
-                        <!-- Miniaturas de películas (primeras 3) -->
-                        <div class="px-5 py-3 bg-white">
-                            @if($coleccion->peliculas->count() > 0)
-                                <div class="flex -space-x-2 overflow-hidden">
-                                    @foreach($coleccion->peliculas->take(3) as $pelicula)
-                                        @if($pelicula->poster_path)
-                                            <img src="{{ $pelicula->poster_path }}" 
-                                                 class="inline-block h-10 w-10 rounded-full ring-2 ring-white object-cover"
-                                                 title="{{ $pelicula->titulo }}">
-                                        @else
-                                            <div class="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-gray-300 flex items-center justify-center text-xs text-gray-600">
-                                                ?
-                                            </div>
-                                        @endif
-                                    @endforeach
-                                    @if($coleccion->peliculas->count() > 3)
-                                        <span class="inline-block h-10 w-10 rounded-full ring-2 ring-white bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">
-                                            +{{ $coleccion->peliculas->count() - 3 }}
-                                        </span>
-                                    @endif
-                                </div>
-                            @else
-                                <p class="text-sm text-gray-400 italic">Sin películas aún</p>
-                            @endif
-                        </div>
-
                         <!-- Acciones -->
                         <div class="px-5 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
                             <a href="{{ route('colecciones.show', $coleccion->id) }}" 
