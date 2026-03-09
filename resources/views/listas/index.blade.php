@@ -54,10 +54,13 @@
                                         </div>
                                     </div>
                                     
-                                    @if($item->pelicula->generos)
+                                   @if($item->pelicula->generos && $item->pelicula->generos->count() > 0)
                                         <p class="text-sm text-gray-600 mt-2">
-                                            <span class="font-semibold">Géneros:</span> {{ $item->pelicula->generos }}
+                                            <span class="font-semibold">Géneros:</span> 
+                                            {{ $item->pelicula->generos->pluck('nombre')->implode(', ') }}
                                         </p>
+                                    @else
+                                        <p class="text-sm text-gray-400 italic mt-2">Géneros no disponibles</p>
                                     @endif
                                     
                                     <p class="text-sm text-gray-600 mt-2 line-clamp-2">
